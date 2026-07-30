@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bank Sampah Sami Berkah</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f7f6;
+            color: #333;
+            line-height: 1.7;
+        }
+        
+        /* Hero Header dengan Background Foto Kedua */
+        header {
+            position: relative;
+            background: url('foto-kedua.jpg') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        /* Overlay agar teks di header lebih mudah dibaca */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(27, 94, 32, 0.75); /* Warna hijau dengan transparansi */
+            z-index: 1;
+        }
+        
+        header .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        header img {
+            width: 150px;
+            border-radius: 50%;
+            background: #fff;
+            padding: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin: 15px 0 5px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            margin: 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        nav {
+            background: #1b5e20;
+            padding: 12px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 25px;
+        }
+        
+        .card {
+            background: #fff;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,.12);
+        }
+        
+        h2 {
+            color: #2e7d32;
+            border-bottom: 2px solid #2e7d32;
+            padding-bottom: 8px;
+        }
+        
+        h3 {
+            color: #2e7d32;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        h4 {
+            color: #1b5e20;
+            font-size: 1.15rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        
+        /* Style untuk layout dokumentasi kegiatan */
+        .kegiatan-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .kegiatan-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .kegiatan-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        /* MEMBUAT PARAGRAF KEGIATAN MENJADI RATA KANAN KIRI */
+        .kegiatan-text p {
+            text-align: justify;
+        }
+        
+        .kegiatan-image-container {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .kegiatan-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* Style tautan sosial media */
+        .ig-link {
+            color: #c13584;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .ig-link:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-ig {
+            color: #fff;
+            text-decoration: none;
+            opacity: 0.9;
+        }
+        
+        .footer-ig:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        
+        th {
+            background: #2e7d32;
+            color: #fff;
+        }
+        
+        .text-right {
+            text-align: right;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .note-box {
+            font-size: 0.9rem;
+            color: #555;
+            background: #f9f9f9;
+            padding: 10px 15px;
+            border-left: 3px solid #888;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .general-note {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        footer {
+            background: #2e7d32;
+            color: #fff;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 40px;
+        }
+        
+        footer p {
+            margin: 5px 0;
+        }
+        
+        /* Responsif untuk layar kecil */
+        @media (max-width: 768px) {
+            .kegiatan-item {
+                flex-direction: column-reverse;
+            }
+            nav a {
+                display: inline-block;
+                margin: 5px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <img src="logo-bank-sampah.jpg" alt="Logo">
+        <h1>BANK SAMPAH SAMI BERKAH</h1>
+        <p>Jl. Genting Baru No.02/06, Meteseh, Kec. Tembalang, Kota Semarang, Jawa Tengah 50271</p>
+    </div>
+</header>
+
+<nav>
+    <a href="#sejarah">Sejarah</a>
+    <a href="#kegiatan">Kegiatan & Kolaborasi</a>
+    <a href="#operasional">Operasional</a>
+    <a href="#legalitas">Legalitas</a>
+    <a href="#pengurus">Pengurus</a>
+    <a href="#nasabah">Nasabah</a>
+</nav>
+
+<div class="container">
+    
+    <!-- Section Sejarah -->
+<div class="card" id="sejarah">
+    <h2>Sejarah</h2>
+
+    <p>
+        Bank Sampah Sami Berkah berawal dari program Pengabdian Masyarakat
+        FISIP Universitas Diponegoro (UNDIP). Awalnya pembentukan bank sampah
+        dilakukan sebagai kebutuhan dokumentasi kegiatan sehingga Bu Aniqoh
+        menyiapkan nama, banner, serta visi dan misi hanya dalam satu malam.
+        Setelah seluruh persiapan selesai, kegiatan Bank Sampah Sami Berkah
+        mulai dijalankan dan resmi beroperasi pada
+        <strong>19 Oktober 2019</strong>.
+    </p>
+
+    <p>
+        Kehadiran Bank Sampah Sami Berkah menjadi awal perubahan lingkungan
+        RW 06 Kelurahan Meteseh yang sebelumnya dikenal sebagai kawasan
+        kumuh. Melalui semangat gotong royong masyarakat dan dukungan berbagai
+        pihak, bank sampah mampu menciptakan lingkungan yang lebih bersih,
+        sehat, serta memperoleh berbagai bantuan sarana dan prasarana
+        kebersihan untuk menunjang kegiatan operasional.
+    </p>
+
+    <hr style="margin:30px 0;">
+
+    <h3>Visi</h3>
+
+    <div style="background:#e8f5e9;
+                border-left:5px solid #2e7d32;
+                padding:18px;
+                border-radius:8px;
+                margin-bottom:25px;">
+        <p style="margin:0;font-size:16px;text-align:justify;">
+            <strong>
+                "Terwujudnya Bank Sampah yang Manfaat dan Barokah,
+                yang mampu menciptakan lingkungan bersih, hijau,
+                sehat serta dapat meningkatkan perekonomian masyarakat."
+            </strong>
+        </p>
+    </div>
+
+    <h3>Misi</h3>
+
+    <ol style="line-height:2;">
+        <li>Mengurangi timbunan sampah organik maupun non organik.</li>
+
+        <li>Menciptakan lingkungan bersih, hijau, dan sehat.</li>
+
+        <li>Memberdayakan masyarakat dalam pengelolaan sampah.</li>
+
+        <li>Menambah nilai guna dan ekonomi dari sampah.</li>
+
+        <li>Membangun Bank Sampah untuk kegiatan sosial dan sarana pendidikan masyarakat.</li>
+    </ol>
+
+</div>
+
+    <!-- Section Halaman Dokumentasi Kegiatan -->
+    <div class="card" id="kegiatan">
+        <h2>Kegiatan & Dokumentasi</h2>
+        
+        <!-- Item Kegiatan 1: Eco Enzyme (Baru) -->
+        <div class="kegiatan-item">
+            <div class="kegiatan-text">
+                <h3>Edukasi Eco Enzyme bersama Program SDG's & Summer Course UNDIP</h3>
+
+                <p>Pada hari <b>Kamis, 16 Juli 2026</b>, Ibu-Ibu pengurus Bank Sampah Sami Berkah berkesempatan untuk berpartisipasi aktif dalam kegiatan bertaraf internasional yang diselenggarakan oleh Universitas Diponegoro. Acara ini merupakan bagian dari rangkaian program <b>Sustainable Development Goals (SDG's) dan Summer Course</b> yang mempertemukan civitas akademika, mahasiswa asing, serta praktisi lingkungan lokal.</p>
+
+                <p>Dalam kesempatan berharga tersebut, para pengurus dibekali pengetahuan mendalam mengenai pembuatan dan pemanfaatan <b>Eco Enzyme</b>—cairan serbaguna hasil fermentasi limbah organik dapur seperti sisa kulit buah dan sayuran. Pembuatan Eco Enzyme ini menjadi solusi praktis tingkat rumah tangga untuk menekan volume sampah organik yang masuk ke TPA sekaligus menghasilkan cairan organik kaya manfaat sebagai pembersih alami, pupuk, hingga disinfektan.</p>
+
+                <p>Kolaborasi ini menegaskan posisi Bank Sampah Sami Berkah yang tidak hanya aktif mengelola sampah anorganik, tetapi juga terus memperluas kapasitas dan inovasinya demi terwujudnya pemukiman yang mandiri dan berkelanjutan.</p>
+            </div>
+
+            <div class="kegiatan-image-container">
+                <img src="foto-ketiga.jpg" alt="Kegiatan SDG's dan Summer Course Eco Enzyme UNDIP">
+                <p class="caption">
+                    Foto Bersama Pengurus Bank Sampah Sami Berkah di Acara Summer Course UNDIP 2026
+                </p>
+            </div>
+        </div>
+
+        <!-- Item Kegiatan 2: KKN Tematik -->
+        <div class="kegiatan-item">
+            <div class="kegiatan-text">
+                <h3>Aksi Pemilahan Sampah bersama KKN Tematik UNDIP Tim 124</h3>
+                <p>Pada hari <b>Sabtu, 11 Juli 2026</b>, Bank Sampah Sami Berkah mendapatkan dukungan penuh dari para mahasiswa yang tergabung dalam <b>KKN Tematik Universitas Diponegoro (UNDIP) Tim 124 Tahun 2026</b>. Kehadiran generasi muda ini membawa semangat baru dalam upaya pelestarian lingkungan di wilayah Genting Kelurahan Meteseh, Kota Semarang.</p>
+                <p>Dalam kegiatan operasional mingguan tersebut, para mahasiswa terjun langsung ke lapangan untuk membantu proses pemilahan sampah anorganik yang dibawa oleh para nasabah. Tidak hanya sekadar membantu memilah, tim KKN Tematik 124 juga turut serta memberikan edukasi mengenai pentingnya memisahkan sampah sejak dari rumah guna mempermudah proses daur ulang dan meningkatkan nilai ekonomis dari sampah itu sendiri.</p>
+                <p>Aksi nyata ini ditutup dengan momen kebersamaan yang hangat melalui tradisi makan bersama beralaskan daun pisang. Sinergi positif antara pengurus Bank Sampah, warga, dan mahasiswa UNDIP ini diharapkan dapat terus berlanjut demi mewujudkan lingkungan RW 06 yang bersih, sehat, dan mandiri secara ekonomi.</p>
+                
+                <!-- Info Instagram Kegiatan -->
+                <p style="margin-top: 20px; font-weight: bold; background: #e8f5e9; padding: 10px; border-left: 4px solid #2e7d32; border-radius: 4px;">
+                    📸 Pantau terus kegiatan kami di instagram <a class="ig-link" href="https://www.instagram.com/bank_sampah_sami_berkah" target="_blank">@bank_sampah_sami_berkah</a>
+                </p>
+            </div>
+            <div class="kegiatan-image-container">
+                <img src="foto-pertama.jpg" alt="Mahasiswa KKN Tematik UNDIP Tim 124">
+                <p style="font-size: 0.85rem; color: #666; font-style: italic; margin-top: 5px;">Foto Bersama & Momen Kebersamaan KKN Tematik UNDIP Tim 124 di Bank Sampah</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Section Operasional + Daftar Harga Tabel Komplit -->
+    <div class="card" id="operasional">
+        <h2>Sistem Operasional</h2>
+        <h3>Ketentuan Umum</h3>
+        <table>
+            <tr><th>Aspek</th><th>Keterangan</th></tr>
+            <tr><td>Hari Operasional</td><td> Sabtu</td></tr>
+            <tr><td>Jam</td><td>09.00–12.00 WIB</td></tr>
+            <tr><td>SOP</td><td>Saldo hasil penjualan bisa langsung dicairkan atau ditabung.</td></tr>
+        </table>
+
+        <h3>Daftar Harga Sampah Terbaru</h3>
+
+        <!-- Kategori 1 -->
+        <h4>1. Kategori: Ember & Lain-Lain / Logam</h4>
+        <table>
+            <thead>
+                <tr><th style="width: 60%;">Jenis Sampah</th><th style="width: 40%;" class="text-center">Harga (Rp)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Ember Campur</td><td class="text-center">500 - 1.200</td></tr>
+                <tr><td>Ember</td><td class="text-center">800</td></tr>
+                <tr><td>Gelas K</td><td class="text-center">2.000</td></tr>
+                <tr><td>Gelas B</td><td class="text-center">5.000</td></tr>
+                <tr><td>Kerasan/Mainan</td><td class="text-center">200</td></tr>
+                <tr><td>Tembaga</td><td class="text-center">189.500 - 204.500</td></tr>
+                <tr><td>Al Panci</td><td class="text-center">34.500</td></tr>
+                <tr><td>Al RC</td><td class="text-center">28.500</td></tr>
+                <tr><td>Al Monel</td><td class="text-center">23.500</td></tr>
+                <tr><td>Kuningan</td><td class="text-center">119.500</td></tr>
+            </tbody>
+        </table>
+        <div class="note-box">NB: Gelas bersih tanpa potong mulut yang label mulut bersih.</div>
+
+        <!-- Kategori 2 -->
+        <h4>2. Kategori: Elektronik</h4>
+        <table>
+            <thead>
+                <tr><th style="width: 60%;">Jenis Barang Elektronik</th><th style="width: 40%;" class="text-center">Harga (Rp)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>TV Tabung 14"</td><td class="text-center">19.500</td></tr>
+                <tr><td>TV Tabung 21"</td><td class="text-center">39.500</td></tr>
+                <tr><td>Kulkas</td><td class="text-center">99.500</td></tr>
+                <tr><td>Ac</td><td class="text-center">274.500 - 499.500</td></tr>
+                <tr><td>CPU</td><td class="text-center">64.500 - 99.500</td></tr>
+                <tr><td>Mesin Cuci</td><td class="text-center">29.500 - 49.500</td></tr>
+                <tr><td>Printer</td><td class="text-center">500 - 1.500 / kg</td></tr>
+                <tr><td>Handphone</td><td class="text-center">2.500 - 19.500 / biji</td></tr>
+            </tbody>
+        </table>
+        <div class="note-box">NB: TV Tabung Slim tidak laku, TV LED tidak laku.</div>
+
+        <!-- Kategori 3 -->
+        <h4>3. Kategori: Kertas & Besi</h4>
+        <table>
+            <thead>
+                <tr><th style="width: 60%;">Jenis Sampah</th><th style="width: 40%;" class="text-center">Harga (Rp)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Kardus</td><td class="text-center">1.600</td></tr>
+                <tr><td>HVS Putih</td><td class="text-center">1.000 - 2.500</td></tr>
+                <tr><td>Marga</td><td class="text-center">400</td></tr>
+                <tr><td>Buram</td><td class="text-center">900</td></tr>
+                <tr><td>Sak Semen</td><td class="text-center">2.000</td></tr>
+                <tr><td>Pelumpung/Cone</td><td class="text-center">500</td></tr>
+                <tr><td>Besi</td><td class="text-center">4.900</td></tr>
+                <tr><td>Besi Tipis / C3</td><td class="text-center">2.300</td></tr>
+                <tr><td>Kaleng</td><td class="text-center">2.300</td></tr>
+                <tr><td>Seng</td><td class="text-center">1.200</td></tr>
+                <tr><td>Paku</td><td class="text-center">3.500</td></tr>
+                <tr><td>Filter Oli</td><td class="text-center">2.000</td></tr>
+            </tbody>
+        </table>
+
+        <!-- Kategori 4 -->
+        <h4>4. Kategori: PET & Botol Belino</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 60%;">Jenis Sampah</th>
+                    <th style="width: 40%; text-align: center;">Harga (Rp)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>PET Kotor</td><td class="text-center">2.000</td></tr>
+                <tr><td>PET Bersih BP</td><td class="text-center">6.500</td></tr>
+                <tr><td>PET Bersih BM</td><td class="text-center">5.500</td></tr>
+                <tr><td>PET Warna Kotor</td><td class="text-center">300</td></tr>
+                <tr><td>PET Warna Bersih</td><td class="text-center">500</td></tr>
+                <tr><td>Galon Lemineral</td><td class="text-center">300 / biji</td></tr>
+                <tr><td>Galon Lemineral B</td><td class="text-center">3.500</td></tr>
+                <tr><td>Polos/Kecap</td><td class="text-center">0 <i>(Gratis)</i></td></tr>
+                <tr><td>CY</td><td class="text-center">600</td></tr>
+            </tbody>
+        </table>
+        <div class="note-box">NB: PET Kotor tidak termasuk botol label kertas dan sticker.</div>
+
+        <!-- Catatan Umum -->
+        <div class="general-note">
+            <strong>Catatan Tambahan (NB Umum):</strong>
+            <ul>
+                <li>Barang dalam kondisi kering tanpa sampah dan subalan.</li>
+                <li>Harga dapat berubah sewaktu-waktu.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section Legalitas -->
+    <div class="card" id="legalitas">
+        <h2>Legalitas</h2>
+        <p>Bank Sampah Sami Berkah telah memiliki SK resmi dari Kelurahan Meteseh dan terdaftar di Dinas Lingkungan Hidih Kota Semarang. Pengembangannya didukung oleh FISIP UNDIP serta mengikuti program USAID CCBO pada tahun 2022 yang menghasilkan hibah kontainer bank sampah. Sejak 2023 kegiatan operasional berpindah ke lokasi kontainer tersebut.</p>
+    </div>
+
+    <!-- Section Pengurus -->
+    <div class="card" id="pengurus">
+        <h2>Struktur Pengurus</h2>
+        <table>
+            <tr><th>Nama</th><th>Jabatan</th></tr>
+            <tr><td>Lurah Meteseh</td><td>Pelindung</td></tr>
+            <tr><td>Ketua RW VI</td><td>Penasehat</td></tr>
+            <tr><td>Tim Pengabdian Masyarakat FISIP UNDIP</td><td>Pembina</td></tr>
+            <tr><td>Aniqotunnafiah, S.Pd., M.Ak.</td><td>Ketua</td></tr>
+            <tr><td>Sa'adah</td><td>Sekretaris</td></tr>
+            <tr><td>Lina Siswanti</td><td>Bendahara</td></tr>
+            <tr><td>Aliyah & Mulyani</td><td>Divisi Penimbangan</td></tr>
+            <tr><td>Muhanik & Misrohati</td><td>Divisi Pembukuan</td></tr>
+            <tr><td>Sri Hartini & Isti'anah</td><td>Divisi Pemilahan</td></tr>
+            <tr><td>Tri Suko & Umi Kulsum</td><td>Divisi Pengolahan Sampah</td></tr>
+            <tr><td>Indra Yudi & Hakim</td><td>Divisi Maggot</td></tr>
+        </table>
+    </div>
+
+    <!-- Section Nasabah -->
+    <div class="card" id="nasabah">
+        <h2>Panduan Menjadi Nasabah</h2>
+        <p>Datang langsung setiap hari Sabtu pukul 09.00–12.00 WIB ke Bank Sampah Sami Berkah, lakukan pendaftaran, bawa sampah yang telah dipilah, kemudian hasil penimbangan akan dicatat dalam buku tabungan. Informasi lebih lanjut dapat menghubungi contact person pengurus atau datang langsung ke alamat Bank Sampah Sami Berkah.</p>
+    </div>
+</div>
+
+<!-- Footer Berisi Hak Cipta & Tautan Instagram Resmi -->
+<footer>
+    <p>&copy; 2026 Bank Sampah Sami Berkah</p>
+
+    <p style="font-size: 0.9rem; margin-top: 8px;">
+        Ikuti media sosial kami :
+        <a class="footer-ig"
+           href="https://www.instagram.com/bank_sampah_sami_berkah"
+           target="_blank">
+           Instagram @bank_sampah_sami_berkah
+        </a>
+    </p>
+
+    <p style="margin-top:10px;">
+        <strong>Contact Person :</strong><br>
+        Bu Aniqoh<br>
+        📞 <a href="https://wa.me/+6281226821207"
+              style="color:#fff;text-decoration:none;">
+              081226821207
+        </a>
+    </p>
+
+</footer>

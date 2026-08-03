@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bank Sampah Sami</title>
+    <title>Bank Sampah Sami Berkah</title>
     <style>
         body {
-            font-family: Times New Roman, sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             background: #f4f7f6;
             color: #333;
@@ -229,6 +229,61 @@
         footer p {
             margin: 5px 0;
         }
+
+        /* --- STYLE BARU UNTUK FITUR GALERI --- */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn-upload {
+            background: #2e7d32;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-upload:hover {
+            background: #1b5e20;
+        }
+        .galeri-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .galeri-card {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .galeri-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .galeri-info {
+            padding: 15px;
+        }
+        .galeri-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
         
         /* Responsif untuk layar kecil */
         @media (max-width: 768px) {
@@ -259,6 +314,7 @@
     <a href="#legalitas">Legalitas</a>
     <a href="#pengurus">Pengurus</a>
     <a href="#nasabah">Nasabah</a>
+    <a href="#galeri">Galeri Web</a>
 </nav>
 
 <div class="container">
@@ -308,16 +364,11 @@
 
     <ol style="line-height:2;">
         <li>Mengurangi timbunan sampah organik maupun non organik.</li>
-
         <li>Menciptakan lingkungan bersih, hijau, dan sehat.</li>
-
         <li>Memberdayakan masyarakat dalam pengelolaan sampah.</li>
-
         <li>Menambah nilai guna dan ekonomi dari sampah.</li>
-
         <li>Membangun Bank Sampah untuk kegiatan sosial dan sarana pendidikan masyarakat.</li>
     </ol>
-
 </div>
 
     <!-- Section Halaman Dokumentasi Kegiatan -->
@@ -362,7 +413,6 @@
                 <p style="font-size: 0.85rem; color: #666; font-style: italic; margin-top: 5px;">Foto Bersama & Momen Kebersamaan KKN Tematik UNDIP Tim 124 di Bank Sampah</p>
             </div>
         </div>
-
     </div>
 
     <!-- Section Operasional + Daftar Harga Tabel Komplit -->
@@ -503,6 +553,32 @@
         <h2>Panduan Menjadi Nasabah</h2>
         <p>Datang langsung setiap hari Sabtu pukul 09.00–12.00 WIB ke Bank Sampah Sami Berkah, lakukan pendaftaran, bawa sampah yang telah dipilah, kemudian hasil penimbangan akan dicatat dalam buku tabungan. Informasi lebih lanjut dapat menghubungi contact person pengurus atau datang langsung ke alamat Bank Sampah Sami Berkah.</p>
     </div>
+
+    <!-- SECTION GALERI INTERAKTIF BARU -->
+    <div class="card" id="galeri">
+        <h2>Galeri Foto Kegiatan</h2>
+        
+        <!-- Form Unggah Foto -->
+        <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+            <h3>Unggah Foto Baru</h3>
+            <div class="form-group">
+                <label for="input-foto">Pilih Foto:</label>
+                <input type="file" id="input-foto" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="input-deskripsi">Deskripsi Foto:</label>
+                <textarea id="input-deskripsi" rows="3" placeholder="Tuliskan deskripsi kegiatan di sini..."></textarea>
+            </div>
+            <button class="btn-upload" onclick="unggahFoto()">Posting Foto</button>
+        </div>
+
+        <!-- Wadah Tampilan Koleksi Galeri -->
+        <h3>Koleksi Foto</h3>
+        <div class="galeri-grid" id="wadah-galeri">
+            <!-- Foto yang diunggah akan muncul di sini secara otomatis -->
+        </div>
+    </div>
+
 </div>
 
 <!-- Footer Berisi Hak Cipta & Tautan Instagram Resmi -->
@@ -526,5 +602,96 @@
               081226821207
         </a>
     </p>
-
 </footer>
+
+<!-- SCRIPT UNTUK MENJALANKAN GALERI (VERSI BISA HAPUS) -->
+<script>
+    // Fungsi untuk memuat foto yang sudah tersimpan sebelumnya saat halaman dibuka
+    document.addEventListener("DOMContentLoaded", muatGaleri);
+
+    function unggahFoto() {
+        const inputFoto = document.getElementById('input-foto');
+        const inputDeskripsi = document.getElementById('input-deskripsi');
+        
+        if (inputFoto.files.length === 0 || inputDeskripsi.value.trim() === "") {
+            alert("Mohon pilih foto dan isi deskripsinya terlebih dahulu!");
+            return;
+        }
+
+        const file = inputFoto.files[0];
+        const reader = new FileReader();
+
+        // Mengonversi file gambar menjadi format base64 string agar bisa disimpan di browser
+        reader.onload = function(e) {
+            const dataFoto = {
+                gambar: e.target.result,
+                deskripsi: inputDeskripsi.value
+            };
+
+            // Ambil data lama, gabungkan dengan data baru
+            let listGaleri = JSON.parse(localStorage.getItem('galeriBankSampah')) || [];
+            listGaleri.push(dataFoto);
+            
+            // Simpan kembali ke penyimpanan lokal browser
+            localStorage.setItem('galeriBankSampah', JSON.stringify(listGaleri));
+
+            // Perbarui tampilan halaman dan reset form
+            muatGaleri();
+            inputFoto.value = "";
+            inputDeskripsi.value = "";
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    function muatGaleri() {
+        const wadahGaleri = document.getElementById('wadah-galeri');
+        wadahGaleri.innerHTML = ""; // Bersihkan wadah sebelum memuat ulang
+        
+        const listGaleri = JSON.parse(localStorage.getItem('galeriBankSampah')) || [];
+
+        if(listGaleri.length === 0) {
+            wadahGaleri.innerHTML = "<p style='color:#888; grid-column: 1/-1; text-align:center;'>Belum ada foto yang diunggah.</p>";
+            return;
+        }
+
+        // Tampilkan foto dari urutan yang paling baru (dibalik menggunakan reverse)
+        // Kita gunakan sisa indeks asli agar penghapusan tidak salah target
+        const listTampilan = [...listGaleri].reverse();
+
+        listTampilan.forEach((item, index) => {
+            // Mencari indeks asli di dalam listGaleri sebelum dibalik
+            const indeksAsli = listGaleri.length - 1 - index;
+
+            const itemCard = document.createElement('div');
+            itemCard.className = 'galeri-card';
+            itemCard.innerHTML = `
+                <img src="${item.gambar}" alt="Foto Kegiatan">
+                <div class="galeri-info">
+                    <p>${item.deskripsi}</p>
+                    <button class="btn-hapus" onclick="hapusFoto(${indeksAsli})">Hapus Foto</button>
+                </div>
+            `;
+            wadahGaleri.appendChild(itemCard);
+        });
+    }
+
+    // Fungsi baru untuk menghapus foto berdasarkan indeksnya
+    function hapusFoto(index) {
+        if (confirm("Apakah Anda yakin ingin menghapus foto kegiatan ini?")) {
+            let listGaleri = JSON.parse(localStorage.getItem('galeriBankSampah')) || [];
+            
+            // Menghapus 1 elemen pada indeks terpilih
+            listGaleri.splice(index, 1);
+            
+            // Simpan kembali data terbaru ke localStorage
+            localStorage.setItem('galeriBankSampah', JSON.stringify(listGaleri));
+            
+            // Segarkan tampilan galeri
+            muatGaleri();
+        }
+    }
+</script>
+
+</body>
+</html>
